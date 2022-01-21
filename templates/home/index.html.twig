@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+  
+        <div class="container">
+            {{ render_chart(chart) }}
+        </div>
+ 
+    
+
+    <h1 class="text-center mb-4 mt-4"> Les Chiffres du Covid 19 en France</h1>
+
+    {% for dat in data %}
+        <div class="row mb-4">
+            <div class="col-4">
+                <div class="card m-auto" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title text-center">Nombre de personnes en réanimation</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center"><small>Nombres total de personnes en réanimation</small></p>
+                <p class="btn btn-info btn-block"> {{dat.rea}}</p>
+            </div>
+            </div>
+            </div>
+            <div class="col-4">
+                <div class="card m-auto" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title text-center">Nombres de personnes hospitalisées</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center"><small>Nombres total de personnes  hospitalisées</small></p>
+                <p class="btn btn-info btn-block"> {{dat.hosp}}</p>
+            </div>
+        </div>
+            </div>
+            <div class="col-4">
+                <div class="card m-auto" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title text-center">Nombres de personnes contaminées en 24 heures</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center"><small>Nombres de contaminations quotidiennes 24h</small></p>
+                <p class="btn btn-info btn-block"> {{dat.conf_j1}}</p>
+            </div>
+        </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="card m-auto" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title text-center">Nombre de décès quotidien </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center"><small>Nombres de personnes décédées à l'hopital (Aujourd'hui)</small></p>
+                <p class="btn btn-info btn-block"> {{dat.incid_dchosp}}</p>
+            </div>
+            </div>
+            </div>
+            <div class="col-4">
+                <div class="card m-auto" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title text-center">Nombres de personnes décédées (total)</h5>
+            </div>
+            <div class="card-body mt-2">
+                <p class="card-text text-center mt-2"><small>Nombres de personnes décédées (total)</small></p>
+                <p class="btn btn-info btn-block"> {{dat.dc_tot}}</p>
+            </div>
+        </div>
+            </div>
+            <div class="col-4">
+                <div class="card m-auto" style="width: 18rem;">
+            <div class="card-header">
+                <h5 class="card-title text-center">Date du jour </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text text-center mt-2"><small>Source : Santé publique</small></p>
+                <p class="btn btn-info btn-block mt-5"> {{ dat.date|date('d/m/Y') }}</p>
+            </div>
+        </div>
+            </div>
+        </div>
+        
+    {% endfor %}
+
+    <h2 class="mt-5 text-center mb-5"> Les chiffres Covid en France par département</h2>
+
+    
+        <div class="row">
+            {% for departement in departements %}
+            <div class="col-md-4 mt-3">
+                <div class="card m-auto" style="width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title text-center">{{ departement.lib_dep }}</h5>
+                    </div>
+                    <div class="card-body">
+                         <p class="card-text text-center mt-2">Hospitalisation: {{ departement.hosp }}</p>
+                         <p class="card-text text-center mt-2">Réanimation: {{ departement.rea }}</p>
+                         <a href="{{ path('departement', { 'departement': departement.lib_dep})}}" class="btn btn-info btn-block mt-5"> Voir plus de chiffres</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+           
+       
+{% endblock %}  

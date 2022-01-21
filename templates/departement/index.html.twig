@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les chiffres du COVID-19| {% endblock %}
+
+
+
+{% block content %}
+        <h1> Les chiffres du Covid 19 pour le departement {{data[0].lib_dep}} </h1>
+
+        <div class="row"> 
+            <div class="col-12">
+                <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date du jour</th>
+      <th scope="col">Retour à domicile</th>
+      <th scope="col">Hospitalisation</th>
+      <th scope="col">Réanimation</th>
+      <th scope="col">Décès</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{data[0].date}}</td>
+      <td>{{data[0].incid_rad}}</td>
+      <td>{{data[0].incid_hosp}}</td>
+      <td>{{data[0].incid_rea}}</td>
+      <td>{{data[0].incid_dchosp}}</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+        </div>
+  
+{% endblock %}
